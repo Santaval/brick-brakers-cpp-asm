@@ -21,6 +21,7 @@ ABall::ABall()
    SM_Ball->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
    SM_Ball->SetCollisionProfileName(TEXT("PhysicsActor"));
     ballLaunched = false;
+
 }
 
 void ABall::BeginPlay()
