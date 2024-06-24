@@ -13,8 +13,8 @@ public class BrickBreakers : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
-        // Ruta al archivo objeto ensamblador
-        string AsmPath = Path.Combine(ModuleDirectory, "Asm", "Ball.obj");
+       // Ruta al archivo objeto ensamblador
+        string AsmPath = Path.Combine(ModuleDirectory, "asm", "main.obj");
         PublicAdditionalLibraries.Add(AsmPath);
 
         // Uncomment if you are using Slate UI

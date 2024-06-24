@@ -8,6 +8,7 @@
 #include "Ball.h"
 #include "Brick.h"
 
+
 ABrickBreakersGameModeBase::ABrickBreakersGameModeBase()
 {
 	// Set default score

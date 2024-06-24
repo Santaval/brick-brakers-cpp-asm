@@ -4,7 +4,7 @@
 #include "Brick.h"
 #include "BrickBreakersGameModeBase.h"
 #include <Kismet/GameplayStatics.h>
-
+extern "C" int gen_brick();
 // Sets default values
 ABrick::ABrick()
 {
@@ -76,9 +76,9 @@ void ABrick::SetRandomMaterial()
 	}
 	if (SM_Brick && BrickMaterials.Num() > 0)
 	{	
-		int32 RandomIndex = FMath::RandRange(0, BrickMaterials.Num() - 1);
-		UMaterialInterface* RandomMaterial = BrickMaterials[RandomIndex];
-		hitsRemaining = RandomIndex + 1;
+		int32 brickType = gen_brick();
+		UMaterialInterface* RandomMaterial = BrickMaterials[brickType];
+		hitsRemaining = brickType + 1;
 		SM_Brick->SetMaterial(0, RandomMaterial);
 	}
 }

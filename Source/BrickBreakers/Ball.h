@@ -4,7 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
-extern "C" INT64 calcBallImpulse(INT64);
+
 
 UCLASS()
 class BRICKBREAKERS_API ABall : public AActor

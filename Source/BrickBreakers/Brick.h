@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Brick.generated.h"
-
+//extern "C" INT64 genBrick();	
 UCLASS()
 class BRICKBREAKERS_API ABrick : public AActor
 {

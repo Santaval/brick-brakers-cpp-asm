@@ -4,7 +4,7 @@
 #include "Brick.h"
 #include "BrickBreakersGameModeBase.h"
 #include <Kismet/GameplayStatics.h>
-
+extern "C" double calc_zimpulse(double velocityZ);
 
 ABall::ABall()
 {
@@ -95,14 +95,9 @@ void ABall::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComp
 
 void ABall::controlImpulse(AActor* Other)
 {   
-    bool isToUp = SM_Ball->GetComponentVelocity().Z > 0;
-    float ZImpulse;
-    if (isToUp) {
-        ZImpulse = 200 - SM_Ball->GetComponentVelocity().Z;
-    }
-    else {
-        ZImpulse = (-200) - SM_Ball->GetComponentVelocity().Z;
-    }
+    float velocityZ = SM_Ball->GetComponentVelocity().Z;
+    // asm function impelentaion
+    float ZImpulse = static_cast<float>(calc_zimpulse(static_cast<double>(velocityZ)));
 
 
     // check wich wall the ball hit
