@@ -18,6 +18,7 @@ class BRICKBREAKERS_API ABrickBreakersGameModeBase : public AGameModeBase
 		ABrickBreakersGameModeBase();
 
 		bool gameStarted;
+		int32 lives;
 
 		UPROPERTY(BlueprintReadOnly, Category = "Score")
 			int32 Score;
@@ -33,7 +34,7 @@ class BRICKBREAKERS_API ABrickBreakersGameModeBase : public AGameModeBase
 		UFUNCTION(BlueprintCallable, Category = "Game")
 		void RestartGame();
 
-		void BrickDestroyed();
+		void BrickDestroyed(int type);
 
 
 protected:
@@ -53,6 +54,7 @@ private:
 
 	class UUserWidget* StartMenuWidgetInstance;
 	class UUserWidget* EndMenuWidgetInstance;
+	class UUserWidget* ScoreWidgetInstance;
 
 	int32 TotalBricks;
 	int32 BricksDestroyed;

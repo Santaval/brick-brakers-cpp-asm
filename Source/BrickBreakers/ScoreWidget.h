@@ -18,5 +18,5 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* ScoreText;
 
-	void UpdateScore(int32 Score);
+	void UpdateScore(int32 Score, int32 lives);
 };

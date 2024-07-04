@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "PowerUp.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Brick.generated.h"
@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 private:
 	int hitsRemaining;
-
+	int type;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -40,6 +40,9 @@ public:
 	// Sound to play upon destruction
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
 	USoundBase* BreakingSound;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUp")
+	TSubclassOf<class APowerUp> PowerUpClass;
 
 	// ABrick no continene ningun mimebro onHit solucionar el error
 	

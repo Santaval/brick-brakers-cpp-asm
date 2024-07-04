@@ -4,7 +4,8 @@
 #include "Brick.h"
 #include "BrickBreakersGameModeBase.h"
 #include <Kismet/GameplayStatics.h>
-extern "C" int gen_brick();
+
+extern "C" int destroyedBlock(int type);
 // Sets default values
 ABrick::ABrick()
 {
@@ -38,10 +39,12 @@ void ABrick::Tick(float DeltaTime)
 }
 
 void ABrick::Delete()
+	
 {
 	if (hitsRemaining > 1)
 	{
 		hitsRemaining--;
+		UE_LOG(LogTemp, Warning, TEXT("Destroyed: %d"), destroyedBlock(this->hitsRemaining));
 		UMaterialInterface* RandomMaterial = BrickMaterials[hitsRemaining - 1];
 		SM_Brick->SetMaterial(0, RandomMaterial);
 		// Play destruction sound
@@ -53,10 +56,26 @@ void ABrick::Delete()
 	}
 	else
 	{
+		
+		int rand = FMath::RandRange(0, 100);
+		bool shouldSpawnPowerUp = rand < 20;
+		
+
+		if (PowerUpClass && shouldSpawnPowerUp)
+		{
+			FVector SpawnLocation = GetActorLocation();
+			FRotator SpawnRotation = GetActorRotation();
+			FActorSpawnParameters SpawnParams;
+			GetWorld()->SpawnActor<APowerUp>(PowerUpClass, SpawnLocation, SpawnRotation, SpawnParams);
+		}
+		else {
+						UE_LOG(LogTemp, Warning, TEXT("No PowerUpClass set for %s"), *GetName());
+		}
+
 		ABrickBreakersGameModeBase* GameMode = Cast<ABrickBreakersGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 		if (GameMode)
 		{
-			GameMode->BrickDestroyed();
+			GameMode->BrickDestroyed(this->type);
 		}
 		if (BreakingSound)
 		{
@@ -76,7 +95,9 @@ void ABrick::SetRandomMaterial()
 	}
 	if (SM_Brick && BrickMaterials.Num() > 0)
 	{	
-		int32 brickType = gen_brick();
+		//int32 brickType = gen_brick();
+		int32 brickType = FMath::RandRange(0, BrickMaterials.Num() - 1);
+		this->type = brickType;
 		UMaterialInterface* RandomMaterial = BrickMaterials[brickType];
 		hitsRemaining = brickType + 1;
 		SM_Brick->SetMaterial(0, RandomMaterial);

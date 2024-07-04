@@ -17,6 +17,7 @@ public:
     void Launch();
 
     bool ballLaunched;
+    const float DesiredVelocityMagnitude = 200.0f;
 
 protected:
     virtual void BeginPlay() override;
@@ -32,7 +33,7 @@ public:
     UStaticMeshComponent* GetBall();
 
     virtual void NotifyHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
-    
+    void MaintainConstantVelocity();
     void controlImpulse(AActor* Other);
 
 };

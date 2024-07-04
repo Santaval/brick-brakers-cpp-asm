@@ -8,7 +8,7 @@ ABrickGenerator::ABrickGenerator()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    Rows = 5;         // Number of rows
+    Rows = 10;       // Number of rows
     Columns = 7;     // Number of columns
     BrickSpacingX = 40.f; // Spacing between bricks in X
     BrickSpacingZ = 20.f;  // Spacing between bricks in Z
